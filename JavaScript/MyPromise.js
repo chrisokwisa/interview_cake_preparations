@@ -155,7 +155,7 @@ testPromiseWithLateResolve.then((value) => {
 const testPromiseWithLateReject = new MyPromise((resolve, reject) => {
     setTimeout(() => {
         reject('Promise 2 is rejected');
-    }, 1000);
+    }, 1000); 
 });
 
 testPromiseWithLateReject.then((value) => {
