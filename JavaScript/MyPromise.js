@@ -5,16 +5,16 @@ const STATE = {
 
 }
 
-function isThenable(value) {
-    return value instanceof MyPromise;
+function isThenable(value) { // check if value is a promise
+    return value instanceof MyPromise; // if value is an instance of MyPromise, it is a promise
 }
 
 class MyPromise {
-    constructor(callback) {
+    constructor(callback) {  // callback is a function that takes two parameters: resolve and reject
         // Intial state of promise is empty
         this.state = STATE.PENDING;
         this.state = undefined
-        this.handlers = [];
+        this.handlers = []; // handlers is an array of objects with onSuccess and onFail properties
         // Invoke callback by passing the _resolve and the _reject function of our class
         try {
             callback(this._resolve, this._reject);
@@ -37,12 +37,12 @@ class MyPromise {
         setTimeout(() => {
         // process the promise if it is still in pending state
         
-        if (this.state !== STATE.PENDING) {
+        if (this.state !== STATE.PENDING) { // if promise is already resolved or rejected, we don't need to do anything
             return
         }
 
         // check if value is also a promise
-        if (isThenable(value)) {
+        if (isThenable(value)) { // if value is a promise, we need to wait for it to resolve or reject
             return value.then(this._resolve, this._reject);
         }
 
@@ -112,7 +112,7 @@ class MyPromise {
     }
 
     // Since then method take the second function as onFail, we can leverage it while implementing catch
-    catch(onFail) {
+    catch(onFail) { // catch is just a then method with only onFail function
         return this.then(null, onFail);
     }
 
